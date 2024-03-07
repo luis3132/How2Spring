@@ -9,8 +9,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -35,6 +39,13 @@ public class compra {
     private String comentario;
     
     private String estado;
+    
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    private cliente cliente;
+    
+    @OneToMany(mappedBy = "compra")
+    private List<comprasproducto> comprasproducto;
 
     public Integer getId() {
         return id;

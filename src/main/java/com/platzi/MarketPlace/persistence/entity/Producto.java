@@ -5,7 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.websocket.OnError;
+import java.util.List;
 
 /**
  *
@@ -34,6 +39,13 @@ public class Producto {
     
     @Column(name = "precio_venta")
     private double precioventa;
+    
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    private categoria categoria;
+    
+    @OneToMany(mappedBy = "producto")
+    private List<comprasproducto> comprasproducto;
 
     public Integer getId() {
         return id;
